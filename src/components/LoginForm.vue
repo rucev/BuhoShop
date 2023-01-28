@@ -2,6 +2,9 @@
     <img src="../assets/logo.png" class="logo" alt="logo"/>
     <div class="form-box">
     <div class="container">
+        <div v-if="showError" >
+                <ErrorModal/>
+        </div>
         <form @submit.prevent="submitUser" v-if="!userSubmitted" class="row g-3">
             <div class="form-outline mb-4">
                 <span>Email</span><br>
@@ -23,20 +26,24 @@
 import axios from "axios";
 import { defineComponent } from "vue";
 import {usePosts} from "../stores/posts"
+import ErrorModal  from "./ErrorModal.vue"
 
 const postsStore = usePosts()
 
 export default defineComponent({
+    components: { ErrorModal },
     data() {
         return {
             email: "",
             password: "",
             userSubmitted: false,
-            token: 0
+            token: 0,
+            showError: false,
         };
     },
     methods: {
       async submitUser() {
+          this.showError = false
           postsStore.updateEmail(this.email);
           try {
             const response = await axios.post('https://api.escuelajs.co/api/v1/auth/login', {
@@ -50,10 +57,11 @@ export default defineComponent({
                 this.$router.push({ name: 'products' });
             } else {
                 console.log("oooh, login fail");
-                // TODO: pantalla error (status de de 401)
+                this.showError = true;
             }
           } catch (error) {
             console.log("Error:", error);
+            this.showError = true;
           }
         }
     },
@@ -100,7 +108,7 @@ input[type=email], input[type=password] {
 
 .logo {
     max-height: 10em;
-    margin: 10% 2% 0%;
+    margin: 5% 2% 0%;
 }
 
 </style>
