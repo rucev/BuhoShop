@@ -1,5 +1,5 @@
 <template>
-    <RouterLink v-bind:to="props.toUrl" class="btn btn-primary">
+    <RouterLink v-bind:to="props.toUrl" class="btn btn-secondary">
         <slot></slot>
     </RouterLink>
 </template>
