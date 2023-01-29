@@ -50,8 +50,8 @@ export default defineComponent ({
 <template>
     <NavBar />
 
-    <div class="card border-dark mb-3 mx-auto" style="max-width: 25rem;">
-        <div class="card-header">{{ productData.category.name }}</div>
+    <div class="card border-dark mb-3 mx-auto" style="max-width: 40rem; margin: 1% 0%">
+        <div class="card-header" style="padding-left: 2%;">{{ productData.category.name }}</div>
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item" :class="{ 'active': index === 0 }" v-for="(image, index) of productData.images" :key="image">
@@ -68,10 +68,10 @@ export default defineComponent ({
             </button>
         </div>
 
-        <h5 class="card-title">{{ productData.title }}</h5>
-        <p class="card-text">{{ productData.description }}</p>
-        <div class="card-footer">
-        <small class="text-muted">{{ productData.price / 100}}$ </small>
+        <h5 class="card-title" style="padding-left: 2%; padding-top:1%">{{ productData.title }}</h5>
+        <p class="card-text" style="padding-left: 2%">{{ productData.description }}</p>
+        <div class="card-footer" style="padding-left: 85%">
+        <small class="text">{{ productData.price / 100}}$ </small>
         </div>
     </div>
 </template>
